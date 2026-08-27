@@ -3,31 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Loan Application</title>
+    <title>💰 පුද්ගලික ණය පහසුකම්</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f4f9; padding: 20px; }
-        .container { max-width: 400px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin: auto; }
-        h2 { text-align: center; color: #333; }
-        label { display: block; margin-top: 10px; font-weight: bold; }
-        input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        button { width: 100%; background: #4CAF50; color: white; padding: 10px; border: none; border-radius: 4px; margin-top: 15px; font-size: 16px; cursor: pointer; }
+        body { font-family: Arial, sans-serif; background: #f4f4f9; padding: 15px; margin: 0; }
+        .container { max-width: 500px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin: auto; }
+        h2 { text-align: center; color: #333; font-size: 22px; }
+        .info-box { background: #fff3cd; border: 1px solid #ffeeba; padding: 12px; border-radius: 5px; margin-bottom: 15px; font-size: 14px; color: #856404; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; font-size: 14px; }
+        th { background: #007BFF; color: white; }
+        ul { padding-left: 20px; font-size: 14px; color: #444; }
+        li { margin-bottom: 5px; }
+        label { display: block; margin-top: 10px; font-weight: bold; font-size: 14px; }
+        input { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; background: #4CAF50; color: white; padding: 12px; border: none; border-radius: 4px; margin-top: 15px; font-size: 16px; cursor: pointer; font-weight: bold; }
         button:hover { background: #45a049; }
-        #msg { text-align: center; margin-top: 15px; font-weight: bold; }
+        #msg { text-align: center; margin-top: 15px; font-weight: bold; font-size: 14px; }
+        hr { border: 0; border-top: 1px solid #eee; margin: 15px 0; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Online Loan Form</h2>
+    <h2>💰 පුද්ගලික ණය පහසුකම්</h2>
+    <p style="text-align: center; font-size: 14px; color: #555;">ඔයාට ලක්ෂ 1 සිට ලක්ෂ 50 දක්වා ණය පහසුකම් ලබාගන්න පුළුවන්.</p>
+
+    <hr>
+    <h3>📌 අවශ්‍ය දේවල්</h3>
+    <ul>
+        <li>🪪 හැඳුනුම්පත හෝ පාස්පෝට් එක – ඡායාරූප 2ක්</li>
+        <li>🏠 ස්ථීර පදිංචි ලිපිනය | 📱 දුරකථන අංක 2ක්</li>
+    </ul>
+
+    <hr>
+    <h3>💳 Service Charge විස්තර</h3>
+    <div class="info-box">
+        ⚠️ සර්විස් චාර්ජ් එක ණය එක ගන්න කලින් ඩිපොසිට් කරන්න ඕනේ.
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ණය මුදල</th>
+                <th>Service Charge</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>ලක්ෂ 1</td><td>රු. 5,500</td></tr>
+            <tr><td>ලක්ෂ 2</td><td>රු. 11,000</td></tr>
+            <tr><td>ලක්ෂ 5</td><td>රු. 27,500</td></tr>
+            <tr><td>ලක්ෂ 10</td><td>රු. 55,000</td></tr>
+            <tr><td>ලක්ෂ 20</td><td>රු. 110,000</td></tr>
+            <tr><td>ලක්ෂ 30</td><td>රු. 175,000</td></tr>
+            <tr><td>ලක්ෂ 50</td><td>රු. 275,000</td></tr>
+        </tbody>
+    </table>
+
+    <hr>
+    <h3>⏳ ගෙවීම් කොන්දේසි</h3>
+    <ul>
+        <li>⏱️ අවුරුදු 4ක් ඇතුළත මුදල සම්පූර්ණයෙන් ගෙවිය යුතුයි</li>
+        <li>❌ මාසික වාරික අනිවාර්ය නැහැ</li>
+        <li>✅ ඔබට හැකි විදියට අවුරුදු 4 ඇතුළත ගෙවන්න පුළුවන්</li>
+    </ul>
+
+    <hr>
+    <h2>📩 ණය ඉල්ලුම්පත්‍රය (Apply Form)</h2>
     <form id="loanForm">
         <label>නම (Full Name):</label>
-        <input type="text" id="name" required>
+        <input type="text" id="name" required placeholder="ඔබගේ නම ඇතුළත් කරන්න">
 
         <label>දුරකථන අංකය (Phone Number):</label>
-        <input type="tel" id="phone" required>
+        <input type="tel" id="phone" required placeholder="දුරකථන අංකය ඇතුළත් කරන්න">
 
         <label>ඉල්ලන ණය මුදල (Loan Amount):</label>
-        <input type="number" id="amount" required>
+        <input type="number" id="amount" required placeholder="අවශ්‍ය ණය මුදල ලියන්න">
 
         <button type="submit">Loan එක ඉල්ලන්න (Apply)</button>
     </form>
@@ -37,7 +86,7 @@
 <!-- Firebase SDKs සහ Configuration -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-    import { getFirestore, collection, addfDoc, addDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDWKMaMx3QwAtrqA9J_BFiWBgkp_Dh-a-Q",
@@ -64,7 +113,7 @@
                 name: name,
                 phone: phone,
                 amount: amount,
-                status: "Pending", // අලුතින් එන ඒවා Pending වැටෙයි
+                status: "Pending",
                 createdAt: new Date()
             });
             msg.style.color = "green";
