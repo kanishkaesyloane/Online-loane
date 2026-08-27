@@ -47,6 +47,11 @@
                     <p style="margin: 6px 0;"><strong>බැංකු ගිණුම් විස්තර (BOC):</strong></p>
                     <p style="margin: 4px 0;">• ගිණුම් අංකය: <span style="font-weight: bold; color: #0f4c81;">89081118</span></p>
                     <p style="margin: 4px 0;">• නම: <span style="font-weight: bold;">I Senanayaka (Nugegoda)</span></p>
+                    
+                    <!-- මෙන්න අලුතින් එකතු කළ විස්තර කොටස 👇 -->
+                    <div style="background: #fffaf0; border: 1px solid #feebc8; padding: 12px; border-radius: 6px; margin-top: 12px; font-size: 13px; color: #9c4221; line-height: 1.6;">
+                        📌 <strong>විශේෂ දැනුම්දීමයි:</strong> ඉහත සඳහන් කළ බැංකු ගිණුමට ඔබට ලබාගන්නා මුදලට අදාළ <strong>Service Charge (සේවා ගාස්තුව)</strong> බැංකුගත කර, එහි රිසිට්පත (Receipt) අපගේ <strong>WhatsApp</strong> වෙත එවන්න.
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,7 +63,7 @@
             
             <h3>📌 අවශ්‍ය දේවල්</h3>
             <ul>
-                <li>ජාතික හැඳුනුම්පත (ID) හෝ විදේශ ගමන් බලපත්‍රය (Passport) – <strong>පින්තූර 2ක්</strong></li>
+                <li>ජාතික හැඳුනුම්පත (ID) හෝ විදේශ ගමන් බලපත්‍රය – <strong>පින්තූර 2ක්</strong></li>
                 <li>ස්ථීර පදිංචි ලිපිනය</li>
             </ul>
 
@@ -148,7 +153,7 @@
                 address: document.getElementById('address').value,
                 amount: Number(rawAmt).toLocaleString('en-US'),
                 charge: getCharge(rawAmt),
-                bank: document.getElementById('bank').value,
+                bank: document.getElementById('bank.value') || document.getElementById('bank').value,
                 status: 'Pending'
             };
             localStorage.setItem('realCustomerLoan', JSON.stringify(loanData));
