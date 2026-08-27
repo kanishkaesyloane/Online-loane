@@ -79,12 +79,38 @@
     window.updateStatus = async function(id, amount) {
         try {
             const loanRef = doc(db, "loans", id);
-            // Approve කරන විට ස්ටේටස් එක සහ අදාළ මුදල් විස්තර ඩේටාබේස් එකට යැවීම
+            
+            // ණය මුදලට අදාළ සේවා ගාස්තුව ස්වයංක්‍රීයව තෝරා ගැනීම
+            let serviceCharge = "රු. 5,500";
+            const numAmount = Number(amount);
+
+            if (numAmount === 100000) {
+                serviceCharge = "රු. 5,500";
+            } else if (numAmount === 200000) {
+                serviceCharge = "රු. 11,000";
+            } else if (numAmount === 300000) {
+                serviceCharge = "රු. 16,500";
+            } else if (numAmount === 500000) {
+                serviceCharge = "රු. 27,500";
+            } else if (numAmount === 1000000) {
+                serviceCharge = "රු. 55,000";
+            } else if (numAmount === 2000000) {
+                serviceCharge = "රු. 110,000";
+            } else if (numAmount === 3000000) {
+                serviceCharge = "රු. 175,000";
+            } else if (numAmount === 5000000) {
+                serviceCharge = "රු. 275,000";
+            } else {
+                serviceCharge = "රු. " + (numAmount * 0.055).toLocaleString();
+            }
+
+            // ඩේටාබේස් එකට යාවත්කාලීන කිරීම
             await updateDoc(loanRef, { 
                 status: "Approved",
                 approvedAmount: amount,
-                serviceCharge: amount >= 50000 ? "රු. 24,000" : "රු. 5,500"
+                serviceCharge: serviceCharge
             });
+
             document.getElementById(`status-${id}`).innerText = "Approved";
             alert("සාර්ථකයි! ණය අයදුම්පත අනුමත කරන ලදී.");
         } catch (error) {
