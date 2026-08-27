@@ -3,104 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>පරිපාලක පැනලය (Admin Panel)</title>
+    <title>Admin Panel - Loans</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f4f8; padding: 15px; color: #333; margin: 0; }
-        .container { max-width: 650px; margin: auto; }
-        .card { background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 20px; border-top: 5px solid #2b6cb0; }
-        h1, h2 { color: #2b6cb0; text-align: center; margin-top: 0; }
-        .data-row { margin: 12px 0; font-size: 14px; border-bottom: 1px solid #edf2f7; padding-bottom: 8px; }
-        .data-row strong { color: #2d3748; display: inline-block; width: 150px; }
-        
-        button { background: #38a169; color: white; font-size: 15px; font-weight: 600; border: none; cursor: pointer; padding: 12px; border-radius: 6px; width: 100%; transition: background 0.2s; margin-top: 15px; }
-        button:hover { background: #2f855a; }
-        
-        .no-data { text-align: center; color: #718096; padding: 20px; font-size: 15px; }
-        .badge { background: #ecc94b; color: #744210; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; }
-        .badge-approved { background: #c6f6d5; color: #22543d; }
-        
-        /* Login Box Styles */
-        .login-box input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #cbd5e0; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
-        .hidden { display: none !important; }
+        body { font-family: Arial, sans-serif; background: #f4f4f9; padding: 20px; }
+        .container { max-width: 600px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin: auto; }
+        h2 { text-align: center; color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; font-size: 14px; }
+        th { background: #007BFF; color: white; }
+        .approve-btn { background: #28a745; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; }
+        .reject-btn { background: #dc3545; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Password Login Card -->
-        <div class="card" id="loginCard">
-            <h1>🔒 ඇමින් පිවිසුම</h1>
-            <p style="text-align: center; color: #666; font-size: 13px;">මෙය පරිපාලකයන්ට පමණයි. කරුණාකර මුරපදය ඇතුළත් කරන්න.</p>
-            <div class="login-box">
-                <input type="password" id="adminPass" placeholder="මුරපදය මෙහි ටයිප් කරන්න">
-                <button onclick="checkPassword()">ඇතුල් වන්න</button>
-            </div>
-        </div>
+<div class="container">
+    <h2>Admin Panel - Loan Requests</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>නම</th>
+                <th>දුරකථන අංකය</th>
+                <th>මුදල</th>
+                <th>තත්වය (Status)</th>
+                <th>ක්‍රියාමාර්ග</th>
+            </tr>
+        </thead>
+        <tbody id="loanTableBody">
+            <!-- ඩේටා මෙතනට ලෝඩ් වෙයි -->
+        </tbody>
+    </table>
+</div>
 
-        <!-- Admin Dashboard (Hidden by default) -->
-        <div class="card hidden" id="adminDashboard">
-            <h1>🛠️ ඇමින් පැනලය</h1>
-            <p style="text-align: center; color: #666; font-size: 13px;">კස්ටමර්ලා එවපු ණය අයදුම්පත් මෙතැනින් පාලනය කරන්න.</p>
-            
-            <h2>නව අයදුම්පත</h2>
-            <div id="adminContent">
-                <div class="no-data">දැනට ලැබුණු නව අයදුම්පත් නොමැත.</div>
-            </div>
-        </div>
-    </div>
+<!-- Firebase SDKs සහ Configuration -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
-    <script>
-        // මෙන්න මේ 1234 කියන එක ඔයාට ඕන නම් වෙනස් කරගන්න පුළුවන් 👇
-        const correctPassword = "1234";
+    const firebaseConfig = {
+      apiKey: "AIzaSyDWKMaMx3QwAtrqA9J_BFiWBgkp_Dh-a-Q",
+      authDomain: "online-loane-fe59a.firebaseapp.com",
+      projectId: "online-loane-fe59a",
+      storageBucket: "online-loane-fe59a.firebasestorage.app",
+      messagingSenderId: "571453511861",
+      appId: "1:571453511861:web:1151d187296b1aa2f586fc",
+      measurementId: "G-9CJ8V1GDVH"
+    };
 
-        function checkPassword() {
-            const enteredPass = document.getElementById('adminPass').value;
-            if (enteredPass === correctPassword) {
-                document.getElementById('loginCard').classList.add('hidden');
-                document.getElementById('adminDashboard').classList.remove('hidden');
-                loadAdminData();
-            } else {
-                alert("වැරදි මුරපදයක්! කරුණාකර නැවත උත්සාහ කරන්න.");
-            }
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function loadLoans() {
+        const tableBody = document.getElementById("loanTableBody");
+        tableBody.innerHTML = "";
+        
+        const querySnapshot = await getDocs(collection(db, "loans"));
+        querySnapshot.forEach((document) => {
+            const data = document.data();
+            const id = document.id;
+
+            let row = `<tr>
+                <td>${data.name}</td>
+                <td>${data.phone}</td>
+                <td>Rs. ${data.amount}</td>
+                <td id="status-${id}">${data.status}</td>
+                <td>
+                    <button class="approve-btn" onclick="updateStatus('${id}', 'Approved')">Approve</button>
+                    <button class="reject-btn" onclick="updateStatus('${id}', 'Rejected')">Reject</button>
+                </td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+    }
+
+    window.updateStatus = async function(id, newStatus) {
+        try {
+            const loanRef = doc(db, "loans", id);
+            await updateDoc(loanRef, { status: newStatus });
+            document.getElementById(`status-${id}`).innerText = newStatus;
+            alert("ਸාර්ථකයි! ස්ටේටස් එක වෙනස් විය.");
+        } catch (error) {
+            alert("දෝෂයක් සිදු විය: " + error.message);
         }
+    }
 
-        function loadAdminData() {
-            const data = JSON.parse(localStorage.getItem('realCustomerLoan'));
-            const container = document.getElementById('adminContent');
+    loadLoans();
+</script>
 
-            if (!data) {
-                container.innerHTML = '<div class="no-data">දැනට ලැබුණු නව අයදුම්පත් නොමැත.</div>';
-                return;
-            }
-
-            let badgeHtml = data.status === 'Approved' 
-                ? '<span class="badge badge-approved">අනුමත කරන ලදී (Approved)</span>' 
-                : '<span class="badge">සමාලෝචනය වෙමින් (Pending)</span>';
-
-            container.innerHTML = `
-                <div class="data-row"><strong>තත්ත්වය:</strong> ${badgeHtml}</div>
-                <div class="data-row"><strong>නම:</strong> ${data.name}</div>
-                <div class="data-row"><strong>හැඳුනුම්පත / වි.ගමන්:</strong> ${data.nic}</div>
-                <div class="data-row"><strong>ප්‍රධාන දුරකථන:</strong> ${data.phone1}</div>
-                <div class="data-row"><strong>විකල්ප දුරකථන:</strong> ${data.phone2}</div>
-                <div class="data-row"><strong>ලිපිනය:</strong> ${data.address}</div>
-                <div class="data-row"><strong>ඉල්ලූ මුදල:</strong> රු. ${data.amount}/=</div>
-                <div class="data-row"><strong>සේවා ගාස්තුව:</strong> රු. ${data.charge}/=</div>
-                <div class="data-row"><strong>බැංකු විස්තර:</strong> ${data.bank}</div>
-                
-                ${data.status !== 'Approved' ? '<button onclick="approveLoan()">මෙම ණය අයදුම්පත අනුමත කරන්න (Approve)</button>' : '<p style="color: green; text-align: center; font-weight: bold; margin-top: 15px;">✅ මෙම අයදුම්පත දැනටමත් අනුමත කර ඇත.</p>'}
-            `;
-        }
-
-        function approveLoan() {
-            let data = JSON.parse(localStorage.getItem('realCustomerLoan'));
-            if (data) {
-                data.status = 'Approved';
-                localStorage.setItem('realCustomerLoan', JSON.stringify(data));
-                loadAdminData();
-                alert("අයදුම්පත සාර්ථකව අනුමත කරන ලදී!");
-            }
-        }
-    </script>
 </body>
 </html>
