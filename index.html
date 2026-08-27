@@ -3,143 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Loan Form</title>
+    <title>💰 පුද්ගලික ණය පහසුකම් - සම්පූර්ණ විස්තර</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .form-container {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-            width: 350px;
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #msg {
-            margin-top: 15px;
-            display: none;
-        }
+        body { font-family: Arial, sans-serif; background: #f4f4f9; padding: 15px; margin: 0; line-height: 1.6; }
+        .container { max-width: 600px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin: auto; }
+        h2, h3 { color: #333; }
+        h2 { text-align: center; font-size: 22px; }
+        .info-box { background: #fff3cd; border: 1px solid #ffeeba; padding: 12px; border-radius: 5px; margin-bottom: 15px; font-size: 14px; color: #856404; }
+        .details-section { background: #e9ecef; padding: 15px; border-radius: 6px; margin: 15px 0; font-size: 14px; color: #333; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; font-size: 14px; }
+        th { background: #007BFF; color: white; }
+        ul { padding-left: 20px; font-size: 14px; color: #444; }
+        li { margin-bottom: 6px; }
+        label { display: block; margin-top: 10px; font-weight: bold; font-size: 14px; }
+        input { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; background: #4CAF50; color: white; padding: 12px; border: none; border-radius: 4px; margin-top: 15px; font-size: 16px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #45a049; }
+        #msg { margin-top: 15px; display: none; }
+        hr { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
+        .faq-q { font-weight: bold; color: #0056b3; margin-top: 10px; font-size: 14px; }
+        .faq-a { font-size: 13px; color: #555; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="form-container">
-        <h2>Online Loan Form</h2>
-        <form id="loanForm">
-            <div class="form-group">
-                <label for="name">නම (Full Name):</label>
-                <input type="text" id="name" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">දුරකථන අංකය (Phone Number):</label>
-                <input type="text" id="phone" required>
-            </div>
-            <div class="form-group">
-                <label for="amount">ඉල්ලන ණය මුදල (Loan Amount):</label>
-                <input type="number" id="amount" required>
-            </div>
-            <button type="submit">Loan එක ඉල්ලන්න (Apply)</button>
-        </form>
-        
-        <!-- මැසේජ් එක ලොකුවට පේන තැන -->
-        <div id="msg"></div>
+<div class="container">
+    <h2>💰 පුද්ගලික ණය පහසුකම් (Personal Loans)</h2>
+    <p style="text-align: center; font-size: 14px; color: #555;">අපෙන් ඔබට ලක්ෂ 1 සිට ලක්ෂ 50 දක්වා ඉතා ඉක්මනින් ණය පහසුකම් ලබාගන්න පුළුවන්.</p>
+
+    <div class="details-section">
+        <strong>🌟 අපගේ විශේෂත්වය:</strong> කිසිදු සංකීර්ණ ඇපකරුවෙකු නොමැතුව, ඉතා සුදුසුකම් යටතේ පැය 2ක් ඇතුළත ඔබගේ මුදල් ලබා ගැනීමේ පහසුකම අපි සපයන්නෙමු.
     </div>
 
-    <!-- Firebase සහ JavaScript කෝඩ් එක -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+    <hr>
+    <h3>📌 අවශ්‍ය දේවල් සහ ලිපිලේඛන</h3>
+    <ul>
+        <li>🪪 <strong>ජාතික හැඳුනුම්පත හෝ පාස්පෝට් එක:</strong> පැහැදිලි ඡායාරූප 2ක්</li>
+        <li>🏠 <strong>ස්ථීර පදිංචි ලිපිනය:</strong> ලිපිනය තහවුරු කළ හැකි විස්තර</li>
+        <li>📱 <strong>දුරකථන අංක:</strong> සක්‍රීය දුරකථන අංක 2ක්</li>
+        <li>🏦 <strong>බැංකු විස්තර:</strong> මුදල් බැර කිරීමට අදාළ ගිණුම් විස්තර</li>
+    </ul>
 
-        const firebaseConfig = {
-          apiKey: "AIzaSyDWKMaMx3QwAtrqA9J_BFiWBgkp_Dh-a-Q",
-          authDomain: "online-loane-fe59a.firebaseapp.com",
-          projectId: "online-loane-fe59a",
-          storageBucket: "online-loane-fe59a.firebasestorage.app",
-          messagingSenderId: "571453511861",
-          appId: "1:571453511861:web:1151d187296b1aa2f586fc",
-          measurementId: "G-9CJ8V1GDVH"
-        };
+    <hr>
+    <h3>💳 Service Charge සහ ගාස්තු විස්තර</h3>
+    <div class="info-box">
+        ⚠️ <strong>විශේෂ දැනුම්දීමයි:</strong> සර්විස් චාර්ජ් එක ණය මුදල ලබා ගැනීමට පෙර ඩිපොසිට් කළ යුතු අතර, ඉන්පසු පැය 2ක් ඇතුළත ඔබේ ණය මුදල බැංකුගත කෙරේ.
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ණය මුදල</th>
+                <th>Service Charge</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>ලක්ෂ 1</td><td>රු. 5,500</td></tr>
+            <tr><td>ලක්ෂ 2</td><td>රු. 11,000</td></tr>
+            <tr><td>ලක්ෂ 5</td><td>රු. 27,500</td></tr>
+            <tr><td>ලක්ෂ 10</td><td>රු. 55,000</td></tr>
+            <tr><td>ලක්ෂ 20</td><td>රු. 110,000</td></tr>
+            <tr><td>ලක්ෂ 30</td><td>රු. 175,000</td></tr>
+            <tr><td>ලක්ෂ 50</td><td>රු. 275,000</td></tr>
+        </tbody>
+    </table>
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+    <hr>
+    <h3>⏳ ගෙවීම් කොන්දේසි සහ කාලසීමාව</h3>
+    <ul>
+        <li>⏱️ <strong>කාලසීමාව:</strong> අවුරුදු 4ක් (අවුරුදු 4ක් ඇතුළත මුදල සම්පූර්ණයෙන් ගෙවිය යුතුයි)</li>
+        <li>❌ <strong>මාසික වාරික:</strong> මාසිකව වාරික ගෙවීම අනිවාර්ය නැත</li>
+        <li>✅ <strong>නම්‍යශීලී බව:</strong> ඔබට පහසු ඕනෑම ආකාරයකට අවුරුදු 4 ඇතුළත ගෙවිය හැක.</li>
+        <li>⚠️ <strong>ප්‍රමාද ගාස්තු:</strong> අවුරුදු 4 ඇතුළත ගෙවා අවසන් කිරීමට අපොහොසත් වුවහොත්, ලබාගත් මුදලට 10% ක අමතර මුදලක් අය කෙරේ.</li>
+    </ul>
 
-        document.getElementById("loanForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const name = document.getElementById("name").value;
-            const phone = document.getElementById("phone").value;
-            const amount = document.getElementById("amount").value;
-            const msg = document.getElementById("msg");
+    <hr>
+    <h3>❓ නිතර අසන ප්‍රශ්න (FAQ)</h3>
+    <div class="faq-q">1. මට කොତෙක් ඉක්මනින් ණය මුදල ලබාගත හැකිද?</div>
+    <div class="faq-a">සර්විස් චාර්ජ් එක තහවුරු කර පැය 2ක් ඇතුළත ඔබගේ ගිණුමට මුදල් බැංකුගත කෙරේ.</div>
 
-            try {
-                await addDoc(collection(db, "loans"), {
-                    name: name,
-                    phone: phone,
-                    amount: amount,
-                    status: "Pending",
-                    createdAt: new Date()
-                });
+    <div class="faq-q">2. ඇපකරුවන් අවශ්‍යද?</div>
+    <div class="faq-a">නැත, මූලික හැඳුනුම්පත් සහ ලිපිනය තහවුරු කිරීම පමණක් ප්‍රමාණවත් වේ.</div>
 
-                // ලොකුවට සහ පැහැදිලිව මැසේජ් එක පෙන්වීම
-                msg.style.display = "block";
-                msg.style.background = "#d4edda";
-                msg.style.color = "#155724";
-                msg.style.padding = "15px";
-                msg.style.borderRadius = "5px";
-                msg.style.fontSize = "16px";
-                msg.style.fontWeight = "bold";
-                msg.style.textAlign = "center";
-                msg.style.border = "1px solid #c3e6cb";
-                msg.innerText = "✨ ඔබගේ ණය ඉල්ලීම සාර්ථකයි! පරීක්ෂා කර බලා දන්වන්නම්.";
+    <hr>
+    <h2>📩 ණය ඉල්ලුම්පත්‍රය (Apply Form)</h2>
+    <form id="loanForm">
+        <label>නම (Full Name):</label>
+        <input type="text" id="name" required placeholder="ඔබගේ සම්පූර්ණ නම ලියන්න">
 
-                document.getElementById("loanForm").reset();
-            } catch (error) {
-                msg.style.display = "block";
-                msg.style.background = "#f8d7da";
-                msg.style.color = "#721c24";
-                msg.style.padding = "15px";
-                msg.style.borderRadius = "5px";
-                msg.innerText = "දෝෂයක් සිදු විය: " + error.message;
-            }
-        });
-    </script>
+        <label>දුරකථන අංකය (Phone Number):</label>
+        <input type="tel" id="phone" required placeholder="දුරකථන අංකය ලියන්න">
+
+        <label>ඉල්ලන ණය මුදල (Loan Amount):</label>
+        <input type="number" id="amount" required placeholder="අවශ්‍ය ණය මුදල ලියන්න">
+
+        <button type="submit">Loan එක ඉල්ලන්න (Apply)</button>
+    </form>
+    
+    <!-- ලොකුවට මැසේජ් එක පේන තැන -->
+    <div id="msg"></div>
+</div>
+
+<!-- Firebase සහ JavaScript කෝඩ් එක -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDWKMaMx3QwAtrqA9J_BFiWBgkp_Dh-a-Q",
+      authDomain: "online-loane-fe59a.firebaseapp.com",
+      projectId: "online-loane-fe59a",
+      storageBucket: "online-loane-fe59a.firebasestorage.app",
+      messagingSenderId: "571453511861",
+      appId: "1:571453511861:web:1151d187296b1aa2f586fc",
+      measurementId: "G-9CJ8V1GDVH"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.getElementById("loanForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const amount = document.getElementById("amount").value;
+        const msg = document.getElementById("msg");
+
+        try {
+            await addDoc(collection(db, "loans"), {
+                name: name,
+                phone: phone,
+                amount: amount,
+                status: "Pending",
+                createdAt: new Date()
+            });
+
+            // ලොකුවට සහ පැහැදිලිව මැසේජ් එක පෙන්වීම
+            msg.style.display = "block";
+            msg.style.background = "#d4edda";
+            msg.style.color = "#155724";
+            msg.style.padding = "15px";
+            msg.style.borderRadius = "5px";
+            msg.style.fontSize = "16px";
+            msg.style.fontWeight = "bold";
+            msg.style.textAlign = "center";
+            msg.style.border = "1px solid #c3e6cb";
+            msg.innerText = "✨ ඔබගේ ණය ඉල්ලීම සාර්ථකයි! පරීක්ෂා කර බලා දන්වන්නම්.";
+
+            document.getElementById("loanForm").reset();
+        } catch (error) {
+            msg.style.display = "block";
+            msg.style.background = "#f8d7da";
+            msg.style.color = "#721c24";
+            msg.style.padding = "15px";
+            msg.style.borderRadius = "5px";
+            msg.innerText = "දෝෂයක් සිදු විය: " + error.message;
+        }
+    });
+</script>
+
 </body>
 </html>
