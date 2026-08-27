@@ -6,31 +6,31 @@
     <title>Admin Panel - Loans</title>
     <style>
         body { font-family: Arial, sans-serif; background: #f4f4f9; padding: 20px; }
-        .container { max-width: 600px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin: auto; }
+        .container { max-width: 700px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin: auto; }
         h2 { text-align: center; color: #333; }
         table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; font-size: 14px; }
         th { background: #007BFF; color: white; }
-        .approve-btn { background: #28a745; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; }
-        .reject-btn { background: #dc3545; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; }
+        .approve-btn { background: #28a745; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; font-weight: bold; }
+        .reject-btn { background: #dc3545; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Admin Panel - Loan Requests</h2>
+    <h2>🛠️ Admin Panel - ණය ඉල්ලුම්පත්‍ර කළමනාකරණය</h2>
     <table>
         <thead>
             <tr>
-                <th>නම</th>
-                <th>දුරකථන අංකය</th>
-                <th>මුදල</th>
-                <th>තත්වය (Status)</th>
-                <th>ක්‍රියාමාර්ග</th>
+                <th>👤 නම</th>
+                <th>📱 දුරකථන අංකය</th>
+                <th>💰 මුදල</th>
+                <th>📌 තත්වය (Status)</th>
+                <th>⚡ ක්‍රියාමාර්ග</th>
             </tr>
         </thead>
         <tbody id="loanTableBody">
-            <!-- ඩේටා මෙතනට ලෝඩ් වෙයි -->
+            <!-- ඩේටා මෙතනට ලෝඩ් වේ -->
         </tbody>
     </table>
 </div>
@@ -53,58 +53,72 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
+    // ණය ඉල්ලීම් ලෝඩ් කිරීම
     async function loadLoans() {
         const tableBody = document.getElementById("loanTableBody");
         tableBody.innerHTML = "";
         
-        const querySnapshot = await getDocs(collection(db, "loans"));
-        querySnapshot.forEach((document) => {
-            const data = document.data();
-            const id = document.id;
+        try {
+            const querySnapshot = await getDocs(collection(db, "loans"));
+            querySnapshot.forEach((document) => {
+                const data = document.data();
+                const id = document.id;
 
-            let row = `<tr>
-                <td>${data.name}</td>
-                <td>${data.phone}</td>
-                <td>Rs. ${data.amount}</td>
-                <td id="status-${id}">${data.status || 'Pending'}</td>
-                <td>
-                    <button class="approve-btn" onclick="updateStatus('${id}', '${data.amount}')">Approve</button>
-                    <button class="reject-btn" onclick="updateStatus('${id}', 'Rejected')">Reject</button>
-                </td>
-            </tr>`;
-            tableBody.innerHTML += row;
-        });
+                let row = `<tr>
+                    <td>${data.name || 'N/A'}</td>
+                    <td>${data.phone || 'N/A'}</td>
+                    <td>Rs. ${data.amount || 0}</td>
+                    <td id="status-${id}">${data.status || 'Pending'}</td>
+                    <td>
+                        <button class="approve-btn" onclick="updateStatus('${id}', '${data.amount}')">Approve</button>
+                        <button class="reject-btn" onclick="updateStatus('${id}', 'Rejected', '${data.amount}')">Reject</button>
+                    </td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        } catch (err) {
+            console.error("Error loading loans:", err);
+        }
     }
 
-    window.updateStatus = async function(id, amount) {
+    // ණය අනුමත කිරීම හෝ ප්‍රතික්ෂේප කිරීම
+    window.updateStatus = async function(id, statusOrAmount, amountParam) {
         try {
             const loanRef = doc(db, "loans", id);
             
-            // ණය මුදලට අදාළ සේවා ගාස්තුව ස්වයංක්‍රීයව තෝරා ගැනීම
-            let serviceCharge = "රු. 5,500";
-            const numAmount = Number(amount);
-
-            if (numAmount === 100000) {
-                serviceCharge = "රු. 5,500";
-            } else if (numAmount === 200000) {
-                serviceCharge = "රු. 11,000";
-            } else if (numAmount === 300000) {
-                serviceCharge = "රු. 16,500";
-            } else if (numAmount === 500000) {
-                serviceCharge = "රු. 27,500";
-            } else if (numAmount === 1000000) {
-                serviceCharge = "රු. 55,000";
-            } else if (numAmount === 2000000) {
-                serviceCharge = "රු. 110,000";
-            } else if (numAmount === 3000000) {
-                serviceCharge = "රු. 175,000";
-            } else if (numAmount === 5000000) {
-                serviceCharge = "රු. 275,000";
-            } else {
-                serviceCharge = "රු. " + (numAmount * 0.055).toLocaleString();
+            if (statusOrAmount === 'Rejected') {
+                await updateDoc(loanRef, { status: "Rejected" });
+                document.getElementById(`status-${id}`).innerText = "Rejected";
+                alert("ණය ඉල්ලීම ප්‍රතික්ෂේප කරන ලදී.");
+                return;
             }
 
-            // ඩේටාබේස් එකට යාවත්කාලීන කිරීම
+            // මෙහිදී amount එක ලබා ගැනීම
+            const amount = Number(statusOrAmount);
+            let serviceCharge = "රු. 5,500";
+
+            // ඔබ ඉල්ලා සිටි නිවැරදි සේවා ගාස්තු වගුව අනුව සැකසීම
+            if (amount === 100000) {
+                serviceCharge = "රු. 5,500";
+            } else if (amount === 200000) {
+                serviceCharge = "රු. 11,000";
+            } else if (amount === 300000) {
+                serviceCharge = "රු. 16,500";
+            } else if (amount === 500000) {
+                serviceCharge = "රු. 27,500";
+            } else if (amount === 1000000) {
+                serviceCharge = "රු. 55,000";
+            } else if (amount === 2000000) {
+                serviceCharge = "රු. 110,000";
+            } else if (amount === 3000000) {
+                serviceCharge = "රු. 175,000";
+            } else if (amount === 5000000) {
+                serviceCharge = "රු. 275,000";
+            } else {
+                serviceCharge = "රු. " + (amount * 0.055).toLocaleString();
+            }
+
+            // ඩේටාබේස් එකට අනුමත වූ මුදල සහ නිවැරදි සේවා ගාස්තුව යැවීම
             await updateDoc(loanRef, { 
                 status: "Approved",
                 approvedAmount: amount,
